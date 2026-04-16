@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RMD Calculator — Required Minimum Distribution Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --ink: #1a1a2e;
+    --ink-soft: #4a4a6a;
+    --ink-muted: #8888aa;
+    --paper: #faf9f6;
+    --paper-warm: #f4f1ea;
+    --paper-card: #ffffff;
+    --accent: #2d5a8e;
+    --accent-light: #e8f0f9;
+    --accent-mid: #5580b0;
+    --gold: #b8860b;
+    --gold-light: #fdf6e3;
+    --warn: #b85c00;
+    --warn-light: #fff3e0;
+    --danger: #8b2020;
+    --border: #e0ddd4;
+    --border-soft: #ece9e0;
+    --radius: 10px;
+    --radius-lg: 16px;
+    --shadow: 0 2px 12px rgba(26,26,46,0.08);
+    --shadow-lg: 0 8px 32px rgba(26,26,46,0.12);
+  }
+ 
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+ 
+  /* Header */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(45,90,142,0.4) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(184,134,11,0.2) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+  header h1 em {
+    font-style: italic;
+    color: #a8c4e0;
+  }
+  header p {
+    margin-top: 0.5rem;
+    color: #9999bb;
+    font-size: 0.9rem;
+    font-weight: 300;
+    position: relative;
+  }
+ 
+  /* Layout */
+  .page { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+ 
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 600px) {
+    .grid2, .grid3 { grid-template-columns: 1fr; }
+  }
+ 
+  /* Cards */
+  .card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .card-title .num {
+    width: 24px; height: 24px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+ 
+  /* Form elements */
+  .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  label.lbl {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .currency-wrap { position: relative; }
+  .currency-wrap .prefix {
+    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    font-size: 15px; color: var(--ink-soft); pointer-events: none;
+  }
+  .currency-wrap input { padding-left: 22px !important; }
+  input[type=number], input[type=text], select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--paper);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+  }
+  input[type=number]:focus, input[type=text]:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-mid);
+    box-shadow: 0 0 0 3px rgba(45,90,142,0.1);
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a4a6a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+    cursor: pointer;
+  }
+ 
+  /* Sliders */
+  .slider-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .slider-wrap label.lbl { min-width: 160px; margin-bottom: 0; }
+  input[type=range] {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    appearance: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
+  }
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+  .slider-val {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 52px;
+    text-align: right;
+  }
+ 
+  /* Toggle */
+  .toggle-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .toggle-row input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
+  .toggle-row label { font-size: 13px; color: var(--ink-soft); cursor: pointer; }
+ 
+  /* Strategy note */
+  .strat-note {
+    font-size: 12px;
+    color: var(--ink-muted);
+    background: var(--paper-warm);
+    border-left: 3px solid var(--accent-mid);
+    padding: 8px 12px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-top: 4px;
+    margin-bottom: 10px;
+  }
+ 
+  /* RMD badge */
+  .rmd-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--accent-light);
+    border: 1px solid #b8cfe8;
+    border-radius: var(--radius);
+    padding: 6px 14px; font-size: 13px;
+    color: var(--ink); margin-bottom: 1rem;
+  }
+  .rmd-badge .badge-label { color: var(--ink-soft); }
+  .rmd-badge .badge-val { font-weight: 600; color: var(--accent); }
+ 
+  /* Banner */
+  .banner {
+    background: var(--warn-light);
+    border: 1px solid #f0c080;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--warn);
+    margin-bottom: 12px;
+    display: none;
+  }
+ 
+  /* Metrics */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  @media (max-width: 600px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
+  .metric {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+  }
+  .metric .ml {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+  .metric .mv {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+ 
+  /* Chart */
+  .chart-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+  .chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chart-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+  }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--ink-soft); }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+  .chart-wrap { position: relative; height: 280px; }
+ 
+  /* Table */
+  .table-card {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.25rem;
+  }
+  .table-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-soft);
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    background: var(--paper-warm);
+  }
+  .tbl-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    background: var(--paper-warm);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--border-soft);
+    white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--paper-warm); }
+  .dim { color: var(--ink-muted); font-style: italic; }
+  .warn-row td { color: var(--warn); }
+  .gone-row td { color: var(--danger); }
+  td.pos { color: var(--accent); font-weight: 500; }
+ 
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--accent-mid); text-decoration: none; }
+ 
+  /* IRS note */
+  .irs-note {
+    background: var(--accent-light);
+    border: 1px solid #b8cfe8;
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 12.5px;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
+  .irs-note strong { font-weight: 600; }
+</style>
+</head>
+<body>
+ 
+<header>
+  <h1>Required Minimum <em>Distribution</em> Calculator</h1>
+  <p>Project your future RMDs using the IRS Uniform Lifetime Table (2022) · SECURE 2.0 compliant</p>
+</header>
+ 
+<div class="page">
+ 
+  <div class="irs-note">
+    <strong>How RMDs work:</strong> The IRS requires withdrawals from tax-deferred retirement accounts starting at age 70½ (born 1950 or earlier), 73 (born 1951–1959), or 75 (born 1960 or later) per SECURE 2.0. Your RMD = prior year-end balance ÷ IRS life expectancy factor. This calculator uses the <strong>Uniform Lifetime Table</strong>, which applies to most IRA owners.
+  </div>
+ 
+  <!-- Account Details -->
+  <div class="card">
+    <div class="card-title"><span class="num">1</span> Account details</div>
+    <div class="grid3">
+      <div class="field">
+        <label class="lbl" for="birthYear">Year of birth</label>
+        <input type="number" id="birthYear" value="1961" min="1920" max="2005">
+      </div>
+      <div class="field">
+        <label class="lbl" for="bal">Current account balance</label>
+        <div class="currency-wrap">
+          <span class="prefix">$</span>
+          <input type="text" id="bal" value="500,000" inputmode="numeric">
+        </div>
+      </div>
+      <div class="field">
+        <label class="lbl" for="age">Current age</label>
+        <input type="number" id="age" value="65" min="50" max="95">
+      </div>
+    </div>
+    <div class="rmd-badge">
+      <span class="badge-label">RMD start age:</span>
+      <span class="badge-val" id="rmdAgeDisplay">75</span>
+      <span class="badge-label" id="rmdAgeRule">(born 1960 or later)</span>
+    </div>
+    <div class="slider-wrap">
+      <label class="lbl">Annual growth rate</label>
+      <input type="range" id="gr" min="0" max="12" step="0.5" value="5">
+      <span class="slider-val" id="grV">5.0%</span>
+    </div>
+    <div class="slider-wrap">
+      <label class="lbl">Inflation rate</label>
+      <input type="range" id="inf" min="0" max="6" step="0.25" value="2.5">
+      <span class="slider-val" id="infV">2.5%</span>
+    </div>
+    <p style="font-size:12px;color:var(--ink-muted);margin:-8px 0 14px 0;">Applied to annual spending need only</p>
+  </div>
+ 
+  <!-- Withdrawal Assumptions -->
+  <div class="card">
+    <div class="card-title"><span class="num">2</span> Withdrawal assumptions</div>
+    <div class="grid3">
+      <div class="field">
+        <label class="lbl" for="wStart">Withdrawal start age</label>
+        <input type="number" id="wStart" value="65" min="50" max="95">
+      </div>
+      <div class="field">
+        <label class="lbl" for="spend">Annual spending need</label>
+        <div class="currency-wrap">
+          <span class="prefix">$</span>
+          <input type="text" id="spend" value="40,000" inputmode="numeric">
+        </div>
+      </div>
+      <div class="field">
+        <label class="lbl" for="strat">Strategy</label>
+        <select id="strat">
+          <option value="rmd_only">RMD only</option>
+          <option value="gap" selected>RMD + gap to meet spending</option>
+          <option value="fixed">RMD + fixed extra amount</option>
+          <option value="pct">RMD + % of balance</option>
+        </select>
+      </div>
+    </div>
+    <div id="exRow" class="slider-wrap">
+      <label class="lbl" id="exLbl">Fixed extra ($)</label>
+      <input type="range" id="ex" min="0" max="50000" step="500" value="10000">
+      <span class="slider-val" id="exV">$10,000</span>
+    </div>
+    <div class="toggle-row">
+      <input type="checkbox" id="inflSpend" checked>
+      <label for="inflSpend">Adjust spending for inflation each year</label>
+    </div>
+    <div class="strat-note" id="stratNote"></div>
+    <div class="banner" id="earlyBanner">⚠️ Withdrawals before age 59½ may incur a 10% early withdrawal penalty.</div>
+  </div>
+ 
+  <!-- Summary Metrics -->
+  <div class="metrics">
+    <div class="metric"><div class="ml">Withdrawals start</div><div class="mv" id="m0">—</div></div>
+    <div class="metric"><div class="ml" id="m1label">First RMD (age 75)</div><div class="mv" id="m1">—</div></div>
+    <div class="metric"><div class="ml">Balance at age 85</div><div class="mv" id="m2">—</div></div>
+    <div class="metric"><div class="ml">Est. depletion age</div><div class="mv" id="m3">—</div></div>
+  </div>
+ 
+  <!-- Chart -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <div class="chart-title">Annual distributions by age</div>
+      <div class="legend">
+        <span><span class="sw" style="background:#2d5a8e"></span>RMD</span>
+        <span><span class="sw" style="background:#7aaad4"></span>Voluntary withdrawal</span>
+        <span><span class="sw" style="background:#c0392b;opacity:.8"></span>Spending need</span>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="ch" role="img" aria-label="Stacked bar chart of annual RMD and voluntary withdrawals by age"></canvas>
+    </div>
+  </div>
+ 
+  <!-- Table -->
+  <div class="table-card">
+    <div class="table-header">Year-by-year projection</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Age</th><th>Year</th><th>Start balance</th><th>RMD</th>
+            <th>Voluntary</th><th>Total out</th><th>After withdrawal</th><th>End balance</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+ 
+  <div class="card" style="margin-bottom: 1.25rem;">
+    <div class="card-title" style="margin-bottom: 1rem;">Ways to lower your RMDs</div>
+    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+      <li style="display: flex; gap: 10px; font-size: 13.5px; line-height: 1.5;">
+        <span style="color: var(--accent); font-size: 16px; flex-shrink: 0; margin-top: 1px;">→</span>
+        <span><strong>Convert to a Roth IRA</strong> — Roth IRAs have no RMDs for the original owner. Converting traditional IRA funds reduces future RMD amounts, though you'll owe income tax on the converted amount. Converting smaller amounts over several years can spread the tax burden.</span>
+      </li>
+      <li style="display: flex; gap: 10px; font-size: 13.5px; line-height: 1.5;">
+        <span style="color: var(--accent); font-size: 16px; flex-shrink: 0; margin-top: 1px;">→</span>
+        <span><strong>Donate via Qualified Charitable Distribution (QCD)</strong> — IRA owners age 70½ or older can transfer up to $111,000 directly to charity each year (2026 limit, indexed for inflation). The QCD counts toward your RMD but does not appear in adjusted gross income — a benefit even for those who take the standard deduction.</span>
+      </li>
+      <li style="display: flex; gap: 10px; font-size: 13.5px; line-height: 1.5;">
+        <span style="color: var(--accent); font-size: 16px; flex-shrink: 0; margin-top: 1px;">→</span>
+        <span><strong>Still working? Use the work waiver</strong> — If you're employed past RMD age and own less than 5% of the company, you can defer RMDs from your current employer's 401(k) or 403(b) until you actually retire.</span>
+      </li>
+      <li style="display: flex; gap: 10px; font-size: 13.5px; line-height: 1.5;">
+        <span style="color: var(--accent); font-size: 16px; flex-shrink: 0; margin-top: 1px;">→</span>
+        <span><strong>Use a Qualified Longevity Annuity Contract (QLAC)</strong> — You can invest up to $210,000 (2026 limit, indexed for inflation) in a QLAC. That portion is excluded from your RMD calculation, deferring payments until around age 85.</span>
+      </li>
+      <li style="display: flex; gap: 10px; font-size: 13.5px; line-height: 1.5;">
+        <span style="color: var(--accent); font-size: 16px; flex-shrink: 0; margin-top: 1px;">→</span>
+        <span><strong>Younger spouse rule</strong> — If your spouse is more than 10 years younger and is the sole primary beneficiary of your IRA, you can use the IRS Joint Life and Last Survivor Table instead of the Uniform Lifetime Table, which produces a larger divisor and a smaller required withdrawal each year.</span>
+      </li>
+      <li style="display: flex; gap: 10px; font-size: 13.5px; line-height: 1.5;">
+        <span style="color: var(--accent); font-size: 16px; flex-shrink: 0; margin-top: 1px;">→</span>
+        <span><strong>Nondeductible contributions reduce your tax bill</strong> — If you made after-tax contributions to a traditional IRA, a proportional share of each distribution is tax-free. Keep records of these contributions to calculate the tax-free portion each year.</span>
+      </li>
+    </ul>
+  </div>
+ 
+  <div class="irs-note">
+    <strong>Disclaimer:</strong> This calculator is for educational and planning purposes only. It is not tax or financial advice. Consult a qualified financial advisor or tax professional for guidance specific to your situation. RMD rules may change; always verify with the IRS or your plan administrator.
+  </div>
+ 
+</div>
+ 
+<footer>
+  <p style="margin-bottom:1rem;">Built using the IRS Uniform Lifetime Table (Rev. Proc. 2022-1) · SECURE 2.0 Act compliant · <a href="https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-required-minimum-distributions-rmds" target="_blank">IRS RMD Resources ↗</a></p>
+  <hr style="border:none;border-top:1px solid var(--border);margin-bottom:1rem;">
+  <p style="font-size:11px;color:var(--ink-muted);line-height:1.6;max-width:860px;margin:0 auto 1rem;">
+    Securities and advisory services are offered through LPL Financial (LPL), a registered investment advisor and broker-dealer (member FINRA/SIPC). Insurance products are offered through LPL or its licensed affiliates. Nodaway Valley Bank (NVB) and Nodaway Valley Investment Services™ (NVIS) <strong style="text-decoration:underline;">are not</strong> registered as a broker-dealer or investment advisor. Registered representatives of LPL offer products and services using the name NVIS, and may also be employees of NVB. These products and services are being offered through LPL or its affiliates, which are separate entities from, and not affiliates of, NVB or NVIS. Securities and insurance offered through LPL or its affiliates are:
+  </p>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px;font-size:11px;color:var(--ink-muted);margin:0 auto;max-width:700px;">
+    <strong>Not Insured by FDIC or Any Other Government Agency</strong>
+    <span>|</span>
+    <strong>Not Bank Guaranteed</strong>
+    <span>|</span>
+    <strong>Not Bank Deposits or Obligations</strong>
+    <span>|</span>
+    <strong>May Lose Value</strong>
+  </div>
+  </div>
+</footer>
+ 
+<script>
+const ULT = {72:27.4,73:26.5,74:25.5,75:24.6,76:23.7,77:22.9,78:22.0,79:21.1,80:20.2,81:19.4,82:18.5,83:17.7,84:16.8,85:16.0,86:15.2,87:14.4,88:13.7,89:12.9,90:12.2,91:11.5,92:10.8,93:10.1,94:9.5,95:8.9,96:8.4,97:7.8,98:7.3,99:6.8,100:6.4,101:6.0,102:5.6,103:5.2,104:4.9,105:4.6,106:4.3,107:4.1,108:3.9,109:3.7,110:3.5};
+const BASE_YEAR = 2026;
+let myChart = null;
+ 
+function getRmdAge(birthYear) {
+  if (birthYear <= 1950) return 70.5;
+  if (birthYear <= 1959) return 73;
+  return 75;
+}
+function getRmdRule(birthYear) {
+  if (birthYear <= 1950) return 'born 1950 or earlier — age 70½ rule';
+  if (birthYear <= 1959) return 'born 1951–1959';
+  return 'born 1960 or later';
+}
+ 
+function f(n) { return '$' + Math.round(n).toLocaleString(); }
+ 
+function parseCurrency(str) {
+  return parseFloat(String(str).replace(/[^0-9.]/g, '')) || 0;
+}
+function setupCurrencyInput(id) {
+  const el = document.getElementById(id);
+  el.addEventListener('input', e => {
+    const raw = e.target.value.replace(/[^0-9]/g, '');
+    const cursor = e.target.selectionStart;
+    const prevLen = e.target.value.length;
+    const formatted = raw ? parseInt(raw, 10).toLocaleString() : '';
+    e.target.value = formatted;
+    const diff = formatted.length - prevLen;
+    e.target.setSelectionRange(cursor + diff, cursor + diff);
+    run();
+  });
+  el.addEventListener('blur', e => {
+    const raw = parseCurrency(e.target.value);
+    e.target.value = raw ? raw.toLocaleString() : '';
+  });
+  el.addEventListener('focus', e => { e.target.select(); });
+}
+ 
+function updateUI() {
+  const s = document.getElementById('strat').value;
+  const row = document.getElementById('exRow');
+  const note = document.getElementById('stratNote');
+  const lbl = document.getElementById('exLbl');
+  if (s === 'rmd_only') {
+    row.style.display = 'none';
+    note.textContent = 'Takes the IRS-required RMD once RMD age is reached. If your spending need exceeds the RMD, the difference is also withdrawn from the portfolio. Before RMD age, withdraws the full spending need voluntarily.';
+  } else if (s === 'gap') {
+    row.style.display = 'none';
+    note.textContent = 'Voluntary withdrawal fills the gap between RMD and your spending need. No extra taken if RMD already covers spending.';
+  } else if (s === 'fixed') {
+    row.style.display = 'flex'; lbl.textContent = 'Fixed extra ($)';
+    const e = document.getElementById('ex');
+    if (+e.max <= 10) { e.max = 100000; e.step = 500; e.value = 10000; document.getElementById('exV').textContent = '$10,000'; }
+    note.textContent = 'A fixed additional amount is withdrawn on top of the RMD each year.';
+  } else if (s === 'pct') {
+    row.style.display = 'flex'; lbl.textContent = 'Extra % of balance';
+    const e = document.getElementById('ex');
+    e.max = 10; e.step = 0.25; e.value = 2;
+    document.getElementById('exV').textContent = '2.0%';
+    note.textContent = 'An additional percentage of the account balance is withdrawn on top of the RMD each year.';
+  }
+}
+ 
+function run() {
+  const birthYear = parseInt(document.getElementById('birthYear').value) || 1961;
+  const RMD_AGE   = getRmdAge(birthYear);
+  const effectiveRmdAge = RMD_AGE === 70.5 ? 71 : RMD_AGE;
+  const rmdLabel  = RMD_AGE === 70.5 ? '70½' : String(RMD_AGE);
+ 
+  document.getElementById('rmdAgeDisplay').textContent = rmdLabel;
+  document.getElementById('rmdAgeRule').textContent = '(' + getRmdRule(birthYear) + ')';
+  document.getElementById('m1label').textContent = 'First RMD (age ' + rmdLabel + ')';
+ 
+  const bal0   = parseCurrency(document.getElementById('bal').value);
+  const age0   = parseInt(document.getElementById('age').value)     || 65;
+  const gr     = parseFloat(document.getElementById('gr').value)    / 100;
+  const infl   = parseFloat(document.getElementById('inf').value)   / 100;
+  const wStart = Math.max(age0, parseInt(document.getElementById('wStart').value) || age0);
+  const spend0 = parseCurrency(document.getElementById('spend').value);
+  const strat  = document.getElementById('strat').value;
+  const exVal  = parseFloat(document.getElementById('ex').value)    || 0;
+  const inflSp = document.getElementById('inflSpend').checked;
+ 
+  document.getElementById('earlyBanner').style.display = wStart < 59.5 ? 'block' : 'none';
+ 
+  let acct = bal0;
+  const rows = [];
+  let deplAge = null, bal85 = null;
+ 
+  for (let age = age0; age <= 110; age++) {
+    const yrs    = age - age0;
+    const spend  = inflSp ? spend0 * Math.pow(1 + infl, yrs) : spend0;
+    const factor = ULT[age];
+    const isRMD  = age >= effectiveRmdAge && !!factor;
+    const isWD   = age >= wStart;
+ 
+    let rmd = 0, vol = 0;
+ 
+    if (acct > 0 && isWD) {
+      if (isRMD) {
+        rmd = Math.min(acct, acct / factor);
+        const avail = Math.max(0, acct - rmd);
+        if      (strat === 'rmd_only') vol = Math.min(Math.max(0, spend - rmd), avail);
+        else if (strat === 'gap')      vol = Math.min(Math.max(0, spend - rmd), avail);
+        else if (strat === 'fixed')    vol = Math.min(exVal, avail);
+        else if (strat === 'pct')      vol = Math.min(acct * exVal / 100, avail);
+      } else {
+        const avail = acct;
+        if      (strat === 'rmd_only') vol = Math.min(spend, avail);
+        else if (strat === 'gap')      vol = Math.min(spend, avail);
+        else if (strat === 'fixed')    vol = Math.min(exVal, avail);
+        else if (strat === 'pct')      vol = Math.min(acct * exVal / 100, avail);
+      }
+    }
+ 
+    const total  = rmd + vol;
+    const afterW = Math.max(0, acct - total);
+    const endBal = afterW * (1 + gr);
+ 
+    if (age === 85) bal85 = acct;
+    if (acct <= 0 && deplAge === null) deplAge = age;
+ 
+    rows.push({ age, yr: BASE_YEAR + yrs, startBal: acct, rmd, vol, total, spend, afterW, endBal, isRMD, isWD });
+ 
+    acct = endBal;
+    if (acct <= 0 && age > 75) { deplAge = deplAge || age; break; }
+  }
+ 
+  const firstRMD = rows.find(r => r.isRMD);
+  document.getElementById('m0').textContent = 'Age ' + wStart;
+  document.getElementById('m1').textContent = firstRMD ? f(firstRMD.rmd) : 'N/A';
+  document.getElementById('m2').textContent = bal85 != null ? f(bal85) : '—';
+  document.getElementById('m3').textContent = deplAge ? 'Age ' + deplAge : '100+';
+ 
+  const firstRmdAge = firstRMD ? firstRMD.age : effectiveRmdAge;
+  const chartRows = rows.filter(r => r.age >= Math.min(wStart, firstRmdAge));
+ 
+  if (myChart) { myChart.destroy(); myChart = null; }
+  myChart = new Chart(document.getElementById('ch').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: chartRows.map(r => r.age),
+      datasets: [
+        { label: 'RMD',           data: chartRows.map(r => Math.round(r.rmd)),   backgroundColor: '#2d5a8e', borderRadius: 2, stack: 'a' },
+        { label: 'Voluntary',     data: chartRows.map(r => Math.round(r.vol)),   backgroundColor: '#7aaad4', borderRadius: 2, stack: 'a' },
+        { label: 'Spending need', data: chartRows.map(r => Math.round(r.spend)), type: 'line', borderColor: '#c0392b', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.3, borderDash: [4,3] }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.dataset.label + ': $' + c.raw.toLocaleString() } } },
+      scales: {
+        x: { stacked: true, ticks: { color: '#8888aa', font: { size: 11 }, autoSkip: true, maxTicksLimit: 14 }, grid: { display: false } },
+        y: { stacked: true, ticks: { color: '#8888aa', font: { size: 11 }, callback: v => '$' + (v >= 1000 ? Math.round(v/1000)+'k' : v) }, grid: { color: 'rgba(0,0,0,0.05)' } }
+      }
+    }
+  });
+ 
+  document.getElementById('tbody').innerHTML = rows.map(r => {
+    const short = r.isWD && r.total > 0 && r.total < r.spend;
+    const dep   = r.startBal <= 0;
+    const rc    = dep ? 'gone-row' : short ? 'warn-row' : '';
+ 
+    const rmdCell   = r.rmd > 0 ? f(r.rmd) : r.age < effectiveRmdAge ? '<span class="dim">Not yet</span>' : '—';
+    const volCell   = r.vol > 0 ? f(r.vol) : !r.isWD ? '<span class="dim">Not yet</span>' : '—';
+    const totalCell = r.total > 0 ? f(r.total) : '—';
+ 
+    return `<tr class="${rc}">
+      <td><strong>${r.age}</strong></td>
+      <td>${r.yr}</td>
+      <td>${r.startBal > 0 ? f(r.startBal) : '<span style="color:#8b2020">Depleted</span>'}</td>
+      <td>${rmdCell}</td>
+      <td>${volCell}</td>
+      <td>${totalCell}</td>
+      <td>${f(r.afterW)}</td>
+      <td>${r.endBal > 0 ? f(r.endBal) : '<span style="color:#8b2020">$0</span>'}</td>
+    </tr>`;
+  }).join('');
+}
+ 
+document.getElementById('gr').addEventListener('input',  e => { document.getElementById('grV').textContent  = parseFloat(e.target.value).toFixed(1)+'%'; run(); });
+document.getElementById('inf').addEventListener('input', e => { document.getElementById('infV').textContent = parseFloat(e.target.value).toFixed(2)+'%'; run(); });
+document.getElementById('ex').addEventListener('input',  e => {
+  const s = document.getElementById('strat').value;
+  document.getElementById('exV').textContent = s === 'pct' ? parseFloat(e.target.value).toFixed(1)+'%' : '$'+parseInt(e.target.value).toLocaleString();
+  run();
+});
+['age','wStart','birthYear'].forEach(id => document.getElementById(id).addEventListener('input', run));
+document.getElementById('strat').addEventListener('change', () => { updateUI(); run(); });
+document.getElementById('inflSpend').addEventListener('change', run);
+ 
+setupCurrencyInput('bal');
+setupCurrencyInput('spend');
+ 
+updateUI();
+run();
+</script>
+</body>
+</html>
