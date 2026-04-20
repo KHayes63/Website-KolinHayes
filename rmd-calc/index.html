@@ -391,12 +391,6 @@
       <input type="range" id="gr" min="0" max="12" step="0.5" value="5">
       <span class="slider-val" id="grV">5.0%</span>
     </div>
-    <div class="slider-wrap">
-      <label class="lbl">Inflation rate</label>
-      <input type="range" id="inf" min="0" max="6" step="0.25" value="2.5">
-      <span class="slider-val" id="infV">2.5%</span>
-    </div>
-    <p style="font-size:12px;color:var(--ink-muted);margin:-8px 0 14px 0;">Applied to annual spending need only</p>
   </div>
  
   <!-- Withdrawal Assumptions -->
@@ -433,6 +427,12 @@
       <input type="checkbox" id="inflSpend" checked>
       <label for="inflSpend">Adjust spending for inflation each year</label>
     </div>
+    <div class="slider-wrap">
+      <label class="lbl">Inflation rate</label>
+      <input type="range" id="inf" min="0" max="6" step="0.25" value="2.5">
+      <span class="slider-val" id="infV">2.5%</span>
+    </div>
+    <p style="font-size:12px;color:var(--ink-muted);margin:-8px 0 14px 0;">Applied to annual spending need only</p>
     <div class="strat-note" id="stratNote"></div>
     <div class="banner" id="earlyBanner">⚠️ Withdrawals before age 59½ may incur a 10% early withdrawal penalty.</div>
   </div>
