@@ -192,6 +192,7 @@
     .nl-btn { display: block; text-align: center; background: var(--navy); color: #fff; padding: 0.85rem; border-radius: 6px; font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.2s; }
     .nl-btn:hover { background: var(--navy-light); transform: translateY(-2px); }
     .nl-fine { font-size: 0.7rem; color: var(--muted); margin-top: 0.7rem; }
+    @media (max-width: 760px) { .resources-grid { grid-template-columns: 1fr !important; } }
  
     .login-sec { background: var(--cream); }
     .login-inner { text-align: center; max-width: 500px; margin: 0 auto; }
@@ -248,7 +249,7 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#process">Our Process</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#newsletter">Free Resources</a></li>
     <li><a href="#client-login">Client Login</a></li>
     <li><a href="https://oncehub.com/FreeConsultationWithKolin" target="_blank" rel="noopener" class="nav-cta">Schedule a Call</a></li>
   </ul>
@@ -260,7 +261,7 @@
   <a href="#services" onclick="closeMobile()">Services</a>
   <a href="#process" onclick="closeMobile()">Our Process</a>
   <a href="#pricing" onclick="closeMobile()">Pricing</a>
-  <a href="#newsletter" onclick="closeMobile()">Newsletter</a>
+  <a href="#newsletter" onclick="closeMobile()">Free Resources</a>
   <a href="#client-login" onclick="closeMobile()">Client Login</a>
   <a href="https://oncehub.com/FreeConsultationWithKolin" target="_blank" rel="noopener" onclick="closeMobile()">Schedule a Call →</a>
 </div>
@@ -511,17 +512,32 @@
 <!-- NEWSLETTER -->
 <section class="nl-sec" id="newsletter">
   <div class="sec-inner">
-    <div class="nl-grid">
-      <div>
-        <div class="eyebrow fade-up">Bi-Weekly Newsletter</div>
-        <h2 class="title fade-up">The Confident <em>Planner</em></h2>
-        <p class="subtitle fade-up">Practical financial tips, planning strategies, and insights delivered to your inbox every two weeks. Written by Kolin Hayes to help you make smarter decisions with your money.</p>
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="eyebrow fade-up" style="justify-content:center;">Free Resources</div>
+      <h2 class="title fade-up" style="text-align:center;">Stay informed. <em>Stay ahead.</em></h2>
+      <p class="subtitle fade-up" style="max-width:520px;margin:0.9rem auto 0;text-align:center;">Free content from Kolin to help you make smarter financial decisions — however you like to learn.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;" class="fade-up resources-grid">
+      <div class="nl-card" style="text-align:center;">
+        <div style="margin-bottom:0.8rem;display:flex;justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="#1a2e42" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <p class="nl-title">The Confident Planner</p>
+        <p class="nl-sub">Bi-weekly newsletter with practical financial tips and planning strategies delivered to your inbox.</p>
+        <a href="https://lp.constantcontactpages.com/sl/78ZGt78/ConfidentPlanner" target="_blank" rel="noopener" class="nl-btn">Subscribe →</a>
+        <p class="nl-fine">Free. Unsubscribe anytime.</p>
       </div>
-      <div class="nl-card fade-up">
-        <p class="nl-title">Join the Newsletter</p>
-        <p class="nl-sub">Click below to sign up and start receiving <em>The Confident Planner</em> in your inbox every two weeks.</p>
-        <a href="https://lp.constantcontactpages.com/sl/78ZGt78/ConfidentPlanner" target="_blank" rel="noopener" class="nl-btn">Sign Me Up →</a>
-        <p class="nl-fine">Free to subscribe. Unsubscribe anytime.</p>
+      <div class="nl-card" style="text-align:center;">
+        <div style="margin-bottom:0.8rem;display:flex;justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="#1a2e42" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div>
+        <p class="nl-title">YouTube Channel</p>
+        <p class="nl-sub">Videos on financial planning, investing, retirement, and real-life case studies — explained in plain, easy to understand language.</p>
+        <a href="https://www.youtube.com/@KolinHayesFinancialPlanner" target="_blank" rel="noopener" class="nl-btn">Watch Now →</a>
+        <p class="nl-fine">Free to watch anytime.</p>
+      </div>
+      <div class="nl-card" style="text-align:center;">
+        <div style="margin-bottom:0.8rem;display:flex;justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="#1a2e42" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <p class="nl-title">Financial Planning Podcast</p>
+        <p class="nl-sub">Listen to Kolin discuss financial planning topics to help you make better decisions with your money.</p>
+        <a href="https://financialplanningpodcast.buzzsprout.com/" target="_blank" rel="noopener" class="nl-btn">Listen Now →</a>
+        <p class="nl-fine">Free to listen anytime.</p>
       </div>
     </div>
   </div>
@@ -554,7 +570,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#process">Our Process</a></li>
         <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#newsletter">Newsletter</a></li>
+        <li><a href="#newsletter">Free Resources</a></li>
         <li><a href="https://www.nvb.com" target="_blank" rel="noopener">NVB.com</a></li>
       </ul>
     </div>
