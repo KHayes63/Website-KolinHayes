@@ -139,6 +139,21 @@
   </div>
 </div>
  
+<!-- Calendar section: present in DOM from page load, hidden until results appear -->
+<div id="calendar-section" style="display:none; max-width:860px; margin:0 auto; padding:0 2rem;">
+  <div class="calendar-box">
+    <div class="calendar-title">Want to talk through your results?</div>
+    <div class="calendar-sub">Schedule a free, no-obligation conversation with Kolin — pick a time that works for you below.</div>
+    <div class="calendar-embed">
+      <!-- OnceHub booking calendar inline widget -->
+      <div data-oh-booking-calendar-id="BKC-LDJ8ZPML5X" style="min-width:320px;height:700px;"></div>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:0.5rem;">
+    <button class="retake-btn" style="color:var(--muted);" onclick="retake()">← Retake the quiz</button>
+  </div>
+</div>
+ 
 <div class="newsletter-wrap">
   <div class="newsletter-card">
     <div class="newsletter-eyebrow">Stay Connected</div>
@@ -293,16 +308,14 @@ function showResults() {
       <div class="result-tier">${tier}</div>
       <div class="result-desc">${tierDesc}</div>
       ${gapsHTML}
-      <div class="calendar-box">
-        <div class="calendar-title">Want to talk through your results?</div>
-        <div class="calendar-sub">Schedule a free, no-obligation conversation with Kolin — pick a time that works for you below.</div>
-        <div class="calendar-embed">
-          <div data-oh-booking-calendar-id="BKC-LDJ8ZPML5X" style="min-width:320px;height:700px;"></div>
-        </div>
-      </div>
-      <button class="retake-btn" onclick="retake()">← Retake the quiz</button>
     </div>
   `;
+ 
+  // Show the calendar section (already in DOM so OnceHub widget is already initialized)
+  document.getElementById('calendar-section').style.display = 'block';
+ 
+  // Scroll smoothly to results
+  document.getElementById('result-view').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
  
 function retake() {
@@ -310,8 +323,11 @@ function retake() {
   answers = new Array(questions.length).fill(null);
   multiAnswers = new Array(questions.length).fill(null).map(() => new Set());
   document.getElementById('result-view').style.display = 'none';
+  document.getElementById('result-view').innerHTML = '';
+  document.getElementById('calendar-section').style.display = 'none';
   document.getElementById('quiz-view').style.display = 'block';
   render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
  
 render();
