@@ -4,6 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Retirement Readiness Assessment — Nodaway Valley Investment Services</title>
+ 
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kolinhayes.com/retirementquiz" />
+  <meta property="og:title" content="Retirement Readiness Assessment" />
+  <meta property="og:description" content="Take our free 10-question assessment to identify potential gaps in your retirement plan." />
+  <meta property="og:image" content="https://kolinhayes.com/retirement-quiz-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+ 
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Retirement Readiness Assessment" />
+  <meta name="twitter:description" content="Take our free 10-question assessment to identify potential gaps in your retirement plan." />
+  <meta name="twitter:image" content="https://kolinhayes.com/retirement-quiz-preview.png" />
+ 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <!-- OnceHub booking calendar script -->
   <script type="text/javascript" src="https://cdn.oncehub.com/cal/embed.js" async></script>
@@ -59,7 +75,6 @@
     .btn-next:hover { background: var(--navy-light); }
     .btn-next:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
  
-    /* RESULTS */
     .result-wrap { text-align: center; }
     .score-ring { width: 160px; height: 160px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 1.75rem; border: 2px solid; }
     .score-num { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 400; line-height: 1; }
@@ -74,16 +89,14 @@
     .gap-title { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-bottom: 3px; }
     .gap-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.5; font-weight: 300; }
  
-    /* CALENDAR */
     .calendar-box { background: var(--navy); border-radius: 8px; padding: 2.5rem; margin-top: 1.75rem; text-align: center; }
     .calendar-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--white); margin-bottom: 0.5rem; }
     .calendar-sub { font-size: 0.9rem; color: rgba(255,255,255,0.55); margin-bottom: 1.5rem; font-weight: 300; }
     .calendar-embed { border-radius: 6px; overflow: hidden; background: var(--white); }
  
-    .retake-btn { background: none; border: none; font-size: 0.8rem; color: rgba(255,255,255,0.3); cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 1rem; display: block; width: 100%; text-align: center; }
-    .retake-btn:hover { color: rgba(255,255,255,0.6); }
+    .retake-btn { background: none; border: none; font-size: 0.8rem; color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 1rem; display: block; width: 100%; text-align: center; }
+    .retake-btn:hover { color: var(--text); }
  
-    /* NEWSLETTER */
     .newsletter-wrap { max-width: 860px; margin: 2rem auto 4rem; padding: 0 2rem; }
     .newsletter-card { background: var(--white); border-radius: 8px; border: 1px solid var(--border); padding: 2.5rem 3rem; box-shadow: 0 2px 16px rgba(26,46,66,0.06); text-align: center; }
     .newsletter-eyebrow { font-size: 0.65rem; font-weight: 500; color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
@@ -94,7 +107,6 @@
     .newsletter-btn:hover { background: var(--navy-light); }
     .newsletter-fine { font-size: 0.72rem; color: var(--muted); margin-top: 0.75rem; font-weight: 300; }
  
-    /* FOOTER */
     footer { background: var(--navy); padding: 2rem 3rem; border-top: 1px solid rgba(255,255,255,0.06); }
     .footer-inner { max-width: 860px; margin: 0 auto; }
     .footer-disclaimer { font-size: 0.7rem; color: rgba(255,255,255,0.35); line-height: 1.75; font-weight: 300; margin-bottom: 1.25rem; }
@@ -139,18 +151,17 @@
   </div>
 </div>
  
-<!-- Calendar section: present in DOM from page load, hidden until results appear -->
+<!-- Calendar: in DOM from load, hidden until results -->
 <div id="calendar-section" style="display:none; max-width:860px; margin:0 auto; padding:0 2rem;">
   <div class="calendar-box">
     <div class="calendar-title">Want to talk through your results?</div>
     <div class="calendar-sub">Schedule a free, no-obligation conversation with Kolin — pick a time that works for you below.</div>
     <div class="calendar-embed">
-      <!-- OnceHub booking calendar inline widget -->
       <div data-oh-booking-calendar-id="BKC-LDJ8ZPML5X" style="min-width:320px;height:700px;"></div>
     </div>
   </div>
   <div style="text-align:center; margin-top:0.5rem;">
-    <button class="retake-btn" style="color:var(--muted);" onclick="retake()">← Retake the quiz</button>
+    <button class="retake-btn" onclick="retake()">← Retake the quiz</button>
   </div>
 </div>
  
@@ -201,12 +212,7 @@ function buildGapDesc(key) {
   const timeline = answers[0], income = answers[2], savings = answers[1];
   const urgency = timeline !== null && timeline <= 1 ? "high" : "normal";
   const descs = {
-    savings: () => {
-      if (income === 0 || income === null) return "Without a target income in mind, it's hard to know if what you've saved is enough. Defining your number is an important early step in the planning process.";
-      if (income === 1) return "Your savings and income target may be worth reviewing together to understand how they align over time.";
-      if (income === 2) return "Your savings and income target are worth reviewing closely together. A withdrawal strategy built around your specific goal can help clarify where you stand.";
-      return "Sustaining that level of monthly income for 30+ years requires a substantial asset base and a thoughtful withdrawal strategy. This is worth discussing with an advisor.";
-    },
+    savings: () => { if (income === 0 || income === null) return "Without a target income in mind, it's hard to know if what you've saved is enough. Defining your number is an important early step in the planning process."; if (income === 1) return "Your savings and income target may be worth reviewing together to understand how they align over time."; if (income === 2) return "Your savings and income target are worth reviewing closely together. A withdrawal strategy built around your specific goal can help clarify where you stand."; return "Sustaining that level of monthly income for 30+ years requires a substantial asset base and a thoughtful withdrawal strategy. This is worth discussing with an advisor."; },
     income_target: () => urgency === "high" ? "With retirement approaching, defining a monthly income target is an important step. Most other planning decisions flow from this number." : "Without a monthly income target, it's difficult to assess whether your current plan is on track. This is an important foundation to establish.",
     social_security: () => urgency === "high" ? "With retirement approaching, it may be worth firming up your Social Security strategy. Claiming decisions have long-term implications worth discussing with an advisor." : "Social Security claiming decisions can have a meaningful long-term impact. It's worth understanding your options before you get there.",
     withdrawal: () => urgency === "high" ? "With retirement approaching, the order in which you withdraw from different account types is worth planning now. This decision has tax implications worth reviewing." : "The order in which you withdraw from your accounts — taxable, pre-tax, and Roth — can affect how long your money lasts and your tax situation in retirement. This is worth discussing with an advisor.",
@@ -214,11 +220,7 @@ function buildGapDesc(key) {
     risk: () => urgency === "high" ? "With retirement approaching, it may be worth reviewing how your plan accounts for a potential market downturn early in retirement." : "A significant market downturn early in retirement can have a lasting effect on a portfolio. It's worth understanding how your plan accounts for this possibility.",
     allocation: () => urgency === "high" ? "With retirement approaching, it may be worth reviewing whether your current investment allocation still aligns with your timeline." : "As retirement approaches, investment allocation is worth reviewing periodically to make sure it still reflects your timeline and goals.",
     estate: () => savings !== null && savings >= 2 ? "At your asset level, having estate planning documents in place and up to date is worth prioritizing." : "Having basic estate planning documents in place is an important part of a comprehensive financial plan.",
-    longevity: () => {
-      if (income !== null && income >= 3) return "Planning for a higher monthly income over a 30+ year retirement involves a number of moving parts — withdrawal strategy, inflation, and asset base among them.";
-      if (urgency === "high") return "With retirement approaching, it may be worth reviewing whether your plan accounts for a lengthy retirement period.";
-      return "Retirement can last 30 years or more. Planning for that duration is an important part of the overall picture.";
-    }
+    longevity: () => { if (income !== null && income >= 3) return "Planning for a higher monthly income over a 30+ year retirement involves a number of moving parts — withdrawal strategy, inflation, and asset base among them."; if (urgency === "high") return "With retirement approaching, it may be worth reviewing whether your plan accounts for a lengthy retirement period."; return "Retirement can last 30 years or more. Planning for that duration is an important part of the overall picture."; }
   };
   return descs[key] ? descs[key]() : "";
 }
@@ -235,21 +237,9 @@ function render() {
   const wrap = document.getElementById('options-wrap');
   wrap.innerHTML = '';
   if (q.multi) {
-    q.opts.forEach((opt, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'option-btn' + (multiAnswers[current].has(i) ? ' selected' : '');
-      btn.textContent = opt;
-      btn.onclick = () => { if (multiAnswers[current].has(i)) multiAnswers[current].delete(i); else multiAnswers[current].add(i); render(); };
-      wrap.appendChild(btn);
-    });
+    q.opts.forEach((opt, i) => { const btn = document.createElement('button'); btn.className = 'option-btn' + (multiAnswers[current].has(i) ? ' selected' : ''); btn.textContent = opt; btn.onclick = () => { if (multiAnswers[current].has(i)) multiAnswers[current].delete(i); else multiAnswers[current].add(i); render(); }; wrap.appendChild(btn); });
   } else {
-    q.opts.forEach((opt, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'option-btn' + (answers[current] === i ? ' selected' : '');
-      btn.textContent = opt;
-      btn.onclick = () => { answers[current] = i; render(); };
-      wrap.appendChild(btn);
-    });
+    q.opts.forEach((opt, i) => { const btn = document.createElement('button'); btn.className = 'option-btn' + (answers[current] === i ? ' selected' : ''); btn.textContent = opt; btn.onclick = () => { answers[current] = i; render(); }; wrap.appendChild(btn); });
   }
   const answered = q.multi ? multiAnswers[current].size > 0 : answers[current] !== null;
   document.getElementById('btn-next').disabled = !answered;
@@ -267,54 +257,26 @@ function goNext() {
 function goBack() { if (current > 0) { current--; render(); } }
  
 function showResults() {
-  let total = 0;
-  const gaps = new Set();
-  questions.forEach((q, i) => {
-    if (q.multi) {
-      const sel = multiAnswers[i];
-      total += sel.size;
-      if (sel.size < 2) gaps.add("tax_strategy");
-    } else {
-      const ans = answers[i];
-      if (ans !== null) { total += q.scores[ans]; const g = q.gap[ans]; if (g) gaps.add(g); }
-    }
-  });
+  let total = 0; const gaps = new Set();
+  questions.forEach((q, i) => { if (q.multi) { const sel = multiAnswers[i]; total += sel.size; if (sel.size < 2) gaps.add("tax_strategy"); } else { const ans = answers[i]; if (ans !== null) { total += q.scores[ans]; const g = q.gap[ans]; if (g) gaps.add(g); } } });
   const maxScore = questions.reduce((s, q) => s + (q.multi ? 3 : Math.max(...q.scores)), 0);
   const pct = Math.round((total / maxScore) * 100);
- 
   let tier, ringStyle, tierDesc;
   if (pct < 40) { tier = "Significant gaps to consider"; ringStyle = "background:#fdf2f2;color:#7a2020;border-color:#c8a0a0;"; tierDesc = "Your responses suggest several areas that may benefit from further planning attention before retirement."; }
   else if (pct < 65) { tier = "Some areas worth reviewing"; ringStyle = "background:#fdf8f0;color:#7a4f1a;border-color:#c8b080;"; tierDesc = "Your responses suggest a reasonable foundation, with a few areas that may be worth discussing with an advisor."; }
   else if (pct < 85) { tier = "Good foundation, a few items to consider"; ringStyle = "background:#e8f0e9;color:#2a4a30;border-color:#8ab898;"; tierDesc = "Your responses suggest a solid foundation. There may be a few areas worth reviewing as part of your ongoing planning."; }
   else { tier = "Strong foundation"; ringStyle = "background:#e8f0e9;color:#2a4a30;border-color:#6a9878;"; tierDesc = "Your responses suggest you have a solid base in place. A conversation with an advisor can help confirm your plan is on track."; }
- 
   const gapColors = { savings:"red", income_target:"red", social_security:"amber", withdrawal:"amber", tax_strategy:"amber", risk:"red", allocation:"amber", estate:"amber", longevity:"red" };
   const gapTitles = { savings:"Savings worth reviewing", income_target:"Income target not yet defined", social_security:"Social Security strategy to consider", withdrawal:"Withdrawal order worth planning", tax_strategy:"Account diversification to consider", risk:"Market downturn planning", allocation:"Allocation worth reviewing", estate:"Estate planning to address", longevity:"Longevity planning to consider" };
   const gapList = [...gaps].filter(g => gapTitles[g]);
- 
   let gapsHTML = gapList.length > 0
     ? `<div style="margin-top:1.5rem;"><div class="gaps-label">Areas to discuss with an advisor</div>` + gapList.map(g => `<div class="gap-card"><div class="gap-dot ${gapColors[g]}"></div><div><div class="gap-title">${gapTitles[g]}</div><div class="gap-desc">${buildGapDesc(g)}</div></div></div>`).join('') + '</div>'
     : `<p style="font-size:0.85rem;color:#6b7280;text-align:left;margin-top:1rem;font-style:italic;">No major gaps identified based on your responses.</p>`;
- 
   document.getElementById('quiz-view').style.display = 'none';
   const rv = document.getElementById('result-view');
   rv.style.display = 'block';
-  rv.innerHTML = `
-    <div class="result-wrap">
-      <div class="score-ring" style="${ringStyle}">
-        <div class="score-num">${pct}</div>
-        <div class="score-denom">out of 100</div>
-      </div>
-      <div class="result-tier">${tier}</div>
-      <div class="result-desc">${tierDesc}</div>
-      ${gapsHTML}
-    </div>
-  `;
- 
-  // Show the calendar section (already in DOM so OnceHub widget is already initialized)
+  rv.innerHTML = `<div class="result-wrap"><div class="score-ring" style="${ringStyle}"><div class="score-num">${pct}</div><div class="score-denom">out of 100</div></div><div class="result-tier">${tier}</div><div class="result-desc">${tierDesc}</div>${gapsHTML}</div>`;
   document.getElementById('calendar-section').style.display = 'block';
- 
-  // Scroll smoothly to results
   document.getElementById('result-view').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
  
@@ -334,3 +296,4 @@ render();
 </script>
 </body>
 </html>
+ 
