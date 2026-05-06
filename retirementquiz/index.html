@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Retirement Readiness Assessment — Nodaway Valley Investment Services</title>
  
+ 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzFhMmU0MiIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMiIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIwLjUiPk5WSVM8L3RleHQ+Cjwvc3ZnPg==">
  
@@ -26,22 +27,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <!-- OnceHub booking calendar script -->
   <script type="text/javascript" src="https://cdn.oncehub.com/cal/embed.js" async></script>
- 
-  <!-- Meta Pixel -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '793600195781524');
-  fbq('track', 'PageView');
-  </script>
-  <!-- End Meta Pixel -->
- 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
  
@@ -182,6 +167,12 @@
   <div style="text-align:center; margin-top:0.5rem;">
     <button class="retake-btn" onclick="retake()">← Retake the quiz</button>
   </div>
+  <div style="text-align:center; margin:1.5rem 0 0; padding:1.5rem 2rem; background:#ffffff; border-radius:8px; border:1px solid #ddd8cf;">
+    <p style="font-size:0.68rem; font-weight:500; color:#3a5a40; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.5rem; display:flex; align-items:center; justify-content:center; gap:8px;"><span style="display:block; width:18px; height:1px; background:#3a5a40;"></span>Learn more<span style="display:block; width:18px; height:1px; background:#3a5a40;"></span></p>
+    <p style="font-family:Playfair Display,serif; font-size:1.1rem; font-weight:400; color:#1a2e42; margin-bottom:0.4rem;">Want to know more about Kolin Hayes?</p>
+    <p style="font-size:0.85rem; color:#6b7280; font-weight:300; margin-bottom:1rem; line-height:1.6;">Learn about Kolin's approach to financial planning, services, and how he works with clients.</p>
+    <a href="https://kolinhayes.com" target="_blank" style="display:inline-block; padding:10px 28px; background:#1a2e42; color:#ffffff; border-radius:4px; font-size:0.875rem; font-weight:500; font-family:DM Sans,sans-serif; text-decoration:none;">Visit Our Website &#8594;</a>
+  </div>
 </div>
  
 <div class="newsletter-wrap">
@@ -276,9 +267,6 @@ function goNext() {
 function goBack() { if (current > 0) { current--; render(); } }
  
 function showResults() {
-  // Fire Meta Pixel Lead event when quiz is completed
-  if (typeof fbq === 'function') { fbq('track', 'Lead'); }
- 
   let total = 0; const gaps = new Set();
   questions.forEach((q, i) => { if (q.multi) { const sel = multiAnswers[i]; total += sel.size; if (sel.size < 2) gaps.add("tax_strategy"); } else { const ans = answers[i]; if (ans !== null) { total += q.scores[ans]; const g = q.gap[ans]; if (g) gaps.add(g); } } });
   const maxScore = questions.reduce((s, q) => s + (q.multi ? 3 : Math.max(...q.scores)), 0);
