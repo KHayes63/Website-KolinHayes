@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Retirement Readiness Assessment — Nodaway Valley Investment Services</title>
  
- 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzFhMmU0MiIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMiIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIwLjUiPk5WSVM8L3RleHQ+Cjwvc3ZnPg==">
  
@@ -27,6 +26,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <!-- OnceHub booking calendar script -->
   <script type="text/javascript" src="https://cdn.oncehub.com/cal/embed.js" async></script>
+ 
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'YOUR_PIXEL_ID');
+  fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel -->
+ 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
  
@@ -261,6 +276,9 @@ function goNext() {
 function goBack() { if (current > 0) { current--; render(); } }
  
 function showResults() {
+  // Fire Meta Pixel Lead event when quiz is completed
+  if (typeof fbq === 'function') { fbq('track', 'Lead'); }
+ 
   let total = 0; const gaps = new Set();
   questions.forEach((q, i) => { if (q.multi) { const sel = multiAnswers[i]; total += sel.size; if (sel.size < 2) gaps.add("tax_strategy"); } else { const ans = answers[i]; if (ans !== null) { total += q.scores[ans]; const g = q.gap[ans]; if (g) gaps.add(g); } } });
   const maxScore = questions.reduce((s, q) => s + (q.multi ? 3 : Math.max(...q.scores)), 0);
@@ -300,4 +318,3 @@ render();
 </script>
 </body>
 </html>
- 
