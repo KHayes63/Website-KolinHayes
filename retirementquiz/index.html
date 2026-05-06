@@ -101,6 +101,20 @@
     .retake-btn { background: none; border: none; font-size: 0.8rem; color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 1rem; display: block; width: 100%; text-align: center; }
     .retake-btn:hover { color: var(--text); }
  
+    /* Mobile responsive */
+    @media (max-width: 640px) {
+      .quiz-card { padding: 1.5rem 1.25rem; }
+      .question-text { font-size: 1.2rem; }
+      .option-btn { font-size: 0.9rem; padding: 12px 14px; }
+      .btn-next { padding: 10px 20px; font-size: 0.9rem; }
+      .calendar-box { padding: 1.25rem 1rem; }
+      .calendar-embed { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .calendar-embed > div { min-width: 320px !important; height: 600px !important; }
+      .quiz-wrap, .newsletter-wrap { padding: 0 1rem; }
+      #calendar-section { padding: 0 1rem !important; }
+      .newsletter-card { padding: 1.5rem 1.25rem; }
+    }
+ 
     .newsletter-wrap { max-width: 860px; margin: 2rem auto 4rem; padding: 0 2rem; }
     .newsletter-card { background: var(--white); border-radius: 8px; border: 1px solid var(--border); padding: 2.5rem 3rem; box-shadow: 0 2px 16px rgba(26,46,66,0.06); text-align: center; }
     .newsletter-eyebrow { font-size: 0.65rem; font-weight: 500; color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
