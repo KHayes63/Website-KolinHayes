@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Are You Actually Ready for Retirement? — Kolin Hayes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F5F0E8;
+    --cream-dark: #EDE7D9;
+    --navy: #1C2B3A;
+    --gold: #B5813A;
+    --gold-light: #D4A55A;
+    --text: #2A2A2A;
+    --muted: #6B6560;
+    --border: #D9D2C5;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.6; }
+
+  .nav { background: var(--navy); padding: 14px 32px; display: flex; align-items: center; }
+  .nav-logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 17px; }
+  .nav-sub { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.07em; text-transform: uppercase; margin-top: 1px; }
+
+  .hero { background: var(--navy); border-bottom: 3px solid var(--gold); padding: 64px 24px 72px; text-align: center; }
+  .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: #fff; line-height: 1.15; max-width: 700px; margin: 0 auto 14px; }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,0.7); max-width: 520px; margin: 0 auto 36px; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .pill { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); font-size: 13px; padding: 6px 16px; border-radius: 100px; }
+  .pill-gold { background: rgba(181,129,58,0.2); border: 1px solid rgba(181,129,58,0.5); color: var(--gold-light); font-weight: 600; }
+
+  .body { max-width: 900px; margin: 0 auto; padding: 56px 24px; display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; }
+
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+
+  .intro-text { font-size: 16px; color: var(--text); line-height: 1.8; }
+  .intro-text p { margin-bottom: 18px; }
+  .intro-text p:last-child { margin-bottom: 0; }
+
+  .full-band { background: var(--navy); padding: 64px 24px; }
+  .full-band-inner { max-width: 900px; margin: 0 auto; }
+
+  .callout { font-family: 'Playfair Display', serif; font-size: clamp(20px, 3vw, 28px); font-style: italic; color: #fff; line-height: 1.5; text-align: center; max-width: 720px; margin: 0 auto 56px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .callout span { color: var(--gold-light); }
+
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .pillar { text-align: center; padding: 0 16px; }
+  .pillar-num { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(181,129,58,0.4); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--gold-light); }
+  .pillar-title { font-weight: 600; font-size: 16px; color: #fff; margin-bottom: 10px; }
+  .pillar-body { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; }
+  .pillar + .pillar { border-left: 1px solid rgba(255,255,255,0.1); }
+
+  .reg-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; position: sticky; top: 24px; box-shadow: 0 4px 20px rgba(28,43,58,0.08); }
+  .reg-header { background: var(--navy); padding: 22px 24px 18px; text-align: center; }
+  .reg-eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); font-weight: 500; margin-bottom: 6px; }
+  .reg-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .reg-date { font-size: 13px; color: var(--gold-light); font-weight: 500; margin-bottom: 12px; }
+  .free-badge { display: inline-block; background: rgba(181,129,58,0.2); border: 1px solid rgba(181,129,58,0.4); color: var(--gold-light); font-size: 11px; font-weight: 600; padding: 3px 12px; border-radius: 100px; letter-spacing: 0.07em; text-transform: uppercase; }
+  .reg-body { padding: 24px; }
+  .reg-intro { font-size: 14px; color: var(--muted); text-align: center; line-height: 1.6; margin-bottom: 20px; }
+  .reg-intro strong { color: var(--text); }
+  .reg-btn { display: block; width: 100%; background: var(--gold); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; text-align: center; text-decoration: none; padding: 15px 20px; border-radius: 8px; margin-bottom: 16px; }
+  .reg-btn:hover { background: var(--gold-light); }
+  .zoom-note { display: flex; align-items: flex-start; gap: 10px; background: var(--cream); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 20px; }
+  .zoom-note svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; stroke: var(--gold); stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .perks { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .perk { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .perk-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .reg-footer { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.5; border-top: 1px solid var(--border); padding-top: 14px; }
+
+  footer { background: var(--navy); padding: 28px 24px; text-align: center; }
+  .footer-text { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.8; max-width: 760px; margin: 0 auto; }
+  .footer-text .bold { font-weight: 700; color: rgba(255,255,255,0.85); }
+  .footer-text .bold-underline { font-weight: 700; text-decoration: underline; color: rgba(255,255,255,0.85); }
+  .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; max-width: 680px; margin: 10px auto 0; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; overflow: hidden; }
+  .footer-cell { padding: 8px 10px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); text-align: center; line-height: 1.4; border-right: 1px solid rgba(255,255,255,0.2); }
+  .footer-cell:last-child { border-right: none; }
+
+  @media (max-width: 700px) {
+    .body { grid-template-columns: 1fr; }
+    .reg-card { position: static; }
+    .pillars { grid-template-columns: 1fr; gap: 32px; }
+    .pillar + .pillar { border-left: none; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-cell:nth-child(2) { border-right: none; }
+    .footer-cell:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.2); }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div>
+    <div class="nav-logo">Kolin Hayes</div>
+    <div class="nav-sub">Nodaway Valley Investment Services</div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Free Webinar</div>
+  <h1>Are You <em>Actually</em> Ready for Retirement?</h1>
+  <p class="hero-sub">You've worked hard to save. Join this free webinar to learn how to protect it, grow it, and turn it into a retirement you can actually enjoy.</p>
+  <div class="hero-pills">
+    <span class="pill pill-gold">August 5th at 7:00 PM Central</span>
+    <span class="pill">Free to attend</span>
+    <span class="pill">Educational Webinar</span>
+  </div>
+</section>
+
+<div class="body">
+  <div>
+    <div class="section-label">What this webinar is about</div>
+    <div class="intro-text">
+      <p>For most people, retirement is the finish line they've been running toward for decades. But when it actually gets close, a different question starts to creep in: do I really have enough, and do I actually know what to do with it?</p>
+      <p>The truth is, saving money and knowing how to use it are two completely different skills. Taxes, Social Security timing, healthcare costs, market volatility — these aren't just details. They're decisions that can quietly cost you tens of thousands of dollars if you're not prepared.</p>
+      <p>This webinar was created to help you think more deeply about your upcoming retirement and make the shift from saving to actually spending and enjoying what you've worked so hard to build.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="reg-card">
+      <div class="reg-header">
+        <div class="reg-eyebrow">Reserve your spot</div>
+        <div class="reg-title">Register for Free</div>
+        <div class="reg-date">Tuesday, August 5th &nbsp;&middot;&nbsp; 7:00 PM Central</div>
+        <span class="free-badge">Open to all &mdash; anywhere in the US</span>
+      </div>
+      <div class="reg-body">
+        <p class="reg-intro">Clicking the button below will take you to <strong>Zoom's secure registration page</strong> where you can sign up in about 30 seconds.</p>
+        <a class="reg-btn" href="https://zoom.us/webinar/register/WN_VFr-K_qWR-yytK0hhdMPXA#/registration" target="_blank" rel="noopener">Reserve My Free Seat &rarr;</a>
+        <div class="zoom-note">
+          <svg viewBox="0 0 24 24"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M17 10l4-3v10l-4-3"/></svg>
+          You'll register directly through Zoom and receive a confirmation email with your personal join link before the event.
+        </div>
+        <div class="perks">
+          <div class="perk"><span class="perk-dot"></span>Confirmation sent immediately</div>
+          <div class="perk"><span class="perk-dot"></span>Zoom link delivered before the event</div>
+          <div class="perk"><span class="perk-dot"></span>Recording available to registrants</div>
+        </div>
+        <div class="reg-footer">
+          Kolin Hayes &middot; Nodaway Valley Investment Services<br>Affiliated with LPL Financial &middot; Member FINRA/SIPC
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="full-band">
+  <div class="full-band-inner">
+    <div class="callout">
+      &ldquo;A retirement plan isn&rsquo;t just about having enough. It&rsquo;s about <span>knowing what to do</span> when life doesn&rsquo;t go as expected.&rdquo;
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-num">1</div>
+        <div class="pillar-title">Taxes</div>
+        <div class="pillar-body">Keep more of what you've saved. Most retirees don't realize how much taxes can take until it's too late to plan around them.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">2</div>
+        <div class="pillar-title">Income</div>
+        <div class="pillar-body">Turn your savings into a reliable paycheck. Learn how to draw from the right accounts, in the right order, at the right time.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">3</div>
+        <div class="pillar-title">Confidence</div>
+        <div class="pillar-body">Stop wondering if you're on track. Walk away with clarity on where you stand and what steps actually matter.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-text">
+    <span class="bold">Securities and advisory services are offered through LPL Financial (LPL), a registered investment advisor and broker-dealer (member FINRA/SIPC).</span> Insurance products are offered through LPL or its licensed affiliates. Nodaway Valley Bank (NVB) and Nodaway Valley Investment Services&trade; (NVIS) <span class="bold-underline">are not</span> registered as a broker-dealer or investment advisor. Registered representatives of LPL offer products and services using the name NVIS, and may also be employees of NVB. These products and services are being offered through LPL or its affiliates, which are separate entities from, and not affiliates of, NVB or NVIS. Securities and insurance offered through LPL or its affiliates are:
+  </div>
+  <div class="footer-grid">
+    <div class="footer-cell">Not Insured by FDIC or Any Other Government Agency</div>
+    <div class="footer-cell">Not Bank Guaranteed</div>
+    <div class="footer-cell">Not Bank Deposits or Obligations</div>
+    <div class="footer-cell">May Lose Value</div>
+  </div>
+</footer>
+
+</body>
+</html>
