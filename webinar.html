@@ -3,26 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Are You Actually Ready for Retirement? — Kolin Hayes</title>
+<title>Are You Actually Ready for Retirement? - Kolin Hayes</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --cream: #F5F0E8;
-    --cream-dark: #EDE7D9;
-    --navy: #1C2B3A;
-    --gold: #B5813A;
-    --gold-light: #D4A55A;
-    --text: #2A2A2A;
-    --muted: #6B6560;
-    --border: #D9D2C5;
-  }
+  :root { --cream: #F5F0E8; --cream-dark: #EDE7D9; --navy: #1C2B3A; --gold: #B5813A; --gold-light: #D4A55A; --text: #2A2A2A; --muted: #6B6560; --border: #D9D2C5; }
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.6; }
-
   .nav { background: var(--navy); padding: 14px 32px; display: flex; align-items: center; }
   .nav-logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 17px; }
   .nav-sub { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.07em; text-transform: uppercase; margin-top: 1px; }
-
   .hero { background: var(--navy); border-bottom: 3px solid var(--gold); padding: 64px 24px 72px; text-align: center; }
   .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
   .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: #fff; line-height: 1.15; max-width: 700px; margin: 0 auto 14px; }
@@ -31,28 +20,21 @@
   .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
   .pill { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); font-size: 13px; padding: 6px 16px; border-radius: 100px; }
   .pill-gold { background: rgba(181,129,58,0.2); border: 1px solid rgba(181,129,58,0.5); color: var(--gold-light); font-weight: 600; }
-
   .body { max-width: 900px; margin: 0 auto; padding: 56px 24px; display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; }
-
   .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-
   .intro-text { font-size: 16px; color: var(--text); line-height: 1.8; }
   .intro-text p { margin-bottom: 18px; }
   .intro-text p:last-child { margin-bottom: 0; }
-
   .full-band { background: var(--navy); padding: 64px 24px; }
   .full-band-inner { max-width: 900px; margin: 0 auto; }
-
   .callout { font-family: 'Playfair Display', serif; font-size: clamp(20px, 3vw, 28px); font-style: italic; color: #fff; line-height: 1.5; text-align: center; max-width: 720px; margin: 0 auto 56px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.12); }
   .callout span { color: var(--gold-light); }
-
   .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .pillar { text-align: center; padding: 0 16px; }
   .pillar-num { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(181,129,58,0.4); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--gold-light); }
   .pillar-title { font-weight: 600; font-size: 16px; color: #fff; margin-bottom: 10px; }
   .pillar-body { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; }
   .pillar + .pillar { border-left: 1px solid rgba(255,255,255,0.1); }
-
   .reg-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; position: sticky; top: 24px; box-shadow: 0 4px 20px rgba(28,43,58,0.08); }
   .reg-header { background: var(--navy); padding: 22px 24px 18px; text-align: center; }
   .reg-eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); font-weight: 500; margin-bottom: 6px; }
@@ -70,7 +52,20 @@
   .perk { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
   .perk-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
   .reg-footer { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.5; border-top: 1px solid var(--border); padding-top: 14px; }
-
+  .meet-section { background: var(--cream-dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 24px; }
+  .meet-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; }
+  .meet-photo-wrap { position: relative; }
+  .meet-photo-accent { position: absolute; bottom: -10px; left: -10px; width: 100%; height: 100%; border: 2px solid var(--gold); border-radius: 10px; z-index: 0; }
+  .meet-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 10px; display: block; position: relative; z-index: 1; }
+  .meet-label { font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .meet-name { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--navy); line-height: 1.15; margin-bottom: 6px; }
+  .meet-title { font-size: 14px; color: var(--gold); font-weight: 500; letter-spacing: 0.03em; margin-bottom: 24px; }
+  .meet-bio { font-size: 15px; color: var(--muted); line-height: 1.8; }
+  .meet-bio p { margin-bottom: 16px; }
+  .meet-bio p:last-child { margin-bottom: 0; }
+  .question-list { list-style: none; margin: 16px 0 20px; display: flex; flex-direction: column; gap: 8px; }
+  .question-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text); line-height: 1.5; }
+  .q-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 8px; }
   footer { background: var(--navy); padding: 28px 24px; text-align: center; }
   .footer-text { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.8; max-width: 760px; margin: 0 auto; }
   .footer-text .bold { font-weight: 700; color: rgba(255,255,255,0.85); }
@@ -78,12 +73,13 @@
   .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; max-width: 680px; margin: 10px auto 0; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; overflow: hidden; }
   .footer-cell { padding: 8px 10px; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); text-align: center; line-height: 1.4; border-right: 1px solid rgba(255,255,255,0.2); }
   .footer-cell:last-child { border-right: none; }
-
   @media (max-width: 700px) {
     .body { grid-template-columns: 1fr; }
     .reg-card { position: static; }
     .pillars { grid-template-columns: 1fr; gap: 32px; }
     .pillar + .pillar { border-left: none; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; }
+    .meet-inner { grid-template-columns: 1fr; gap: 32px; }
+    .meet-photo-wrap { max-width: 240px; margin: 0 auto; }
     .footer-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-cell:nth-child(2) { border-right: none; }
     .footer-cell:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.2); }
@@ -115,11 +111,10 @@
     <div class="section-label">What this webinar is about</div>
     <div class="intro-text">
       <p>For most people, retirement is the finish line they've been running toward for decades. But when it actually gets close, a different question starts to creep in: do I really have enough, and do I actually know what to do with it?</p>
-      <p>The truth is, saving money and knowing how to use it are two completely different skills. Taxes, Social Security timing, healthcare costs, market volatility — these aren't just details. They're decisions that can quietly cost you tens of thousands of dollars if you're not prepared.</p>
+      <p>The truth is, saving money and knowing how to use it are two completely different skills. Taxes, Social Security timing, healthcare costs, market volatility — these are decisions that can quietly cost you tens of thousands of dollars if you're not prepared.</p>
       <p>This webinar was created to help you think more deeply about your upcoming retirement and make the shift from saving to actually spending and enjoying what you've worked so hard to build.</p>
     </div>
   </div>
-
   <div>
     <div class="reg-card">
       <div class="reg-header">
@@ -168,6 +163,36 @@
         <div class="pillar-num">3</div>
         <div class="pillar-title">Confidence</div>
         <div class="pillar-body">Stop wondering if you're on track. Walk away with clarity on where you stand and what steps actually matter.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="meet-section">
+  <div class="meet-inner">
+    <div class="meet-photo-wrap">
+      <div class="meet-photo-accent"></div>
+      <img class="meet-photo" src="Profile_Picture_-_Kolin.jpg" alt="Kolin Hayes, Financial Planner">
+    </div>
+    <div class="meet-content">
+      <div class="meet-label">Your Host</div>
+      <div class="meet-name">Kolin Hayes</div>
+      <div class="meet-title">Financial Planner</div>
+      <div class="meet-bio">
+        <p>Hey! I'm a financial planner based in the Parkville and Platte City area, just north of Kansas City, MO. I work with clients all across the USA to help them build retirement plans that actually fit their lives.</p>
+        <p>Over the years, I started noticing a pattern. People who were 5 to 10 years away from retirement kept coming to me with the same questions and the same uncertainty. They had worked hard, saved diligently, and done everything they were supposed to do — but when retirement actually started coming into view, they weren't sure what to do next. Questions like:</p>
+        <ul class="question-list">
+          <li><span class="q-dot"></span>Can I actually retire when I want?</li>
+          <li><span class="q-dot"></span>How much can I safely spend every year?</li>
+          <li><span class="q-dot"></span>Which accounts should I withdraw from first?</li>
+          <li><span class="q-dot"></span>How much will taxes impact my retirement?</li>
+          <li><span class="q-dot"></span>Should I be doing Roth conversions?</li>
+          <li><span class="q-dot"></span>When should I claim Social Security?</li>
+          <li><span class="q-dot"></span>Will Required Minimum Distributions become a tax problem?</li>
+          <li><span class="q-dot"></span>Could Medicare premiums increase because of my income?</li>
+          <li><span class="q-dot"></span>Is my investment allocation still appropriate as retirement gets closer?</li>
+        </ul>
+        <p>I created this webinar to answer those questions. Think of it as an educational class on the things you should be thinking about, planning for, and asking your advisor before you retire. My goal is simple: to give you the knowledge and clarity you need to walk into retirement with confidence, not guesswork.</p>
       </div>
     </div>
   </div>
