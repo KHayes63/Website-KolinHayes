@@ -85,16 +85,32 @@
     .footer-cell:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.2); }
   }
 </style>
+ 
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '793600195781524');
+fbq('track', 'PageView');
+</script>
+<!-- End Meta Pixel Code -->
+ 
 </head>
 <body>
-
+ 
 <nav class="nav">
   <div>
     <div class="nav-logo">Kolin Hayes</div>
     <div class="nav-sub">Nodaway Valley Investment Services</div>
   </div>
 </nav>
-
+ 
 <section class="hero">
   <div class="eyebrow">Free Webinar</div>
   <h1>Are You <em>Actually</em> Ready for Retirement?</h1>
@@ -105,7 +121,7 @@
     <span class="pill">Educational Webinar</span>
   </div>
 </section>
-
+ 
 <div class="body">
   <div>
     <div class="section-label">What this webinar is about</div>
@@ -125,7 +141,7 @@
       </div>
       <div class="reg-body">
         <p class="reg-intro">Clicking the button below will take you directly to the Zoom registration form for this webinar.</p>
-        <a class="reg-btn" href="https://zoom.us/webinar/register/WN_VFr-K_qWR-yytK0hhdMPXA#/registration" target="_blank" rel="noopener">Reserve My Free Seat &rarr;</a>
+        <a class="reg-btn" href="https://zoom.us/webinar/register/WN_VFr-K_qWR-yytK0hhdMPXA#/registration" target="_blank" rel="noopener" onclick="fbq('track', 'Lead');">Reserve My Free Seat &rarr;</a>
         <div class="zoom-note">
           <svg viewBox="0 0 24 24"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M17 10l4-3v10l-4-3"/></svg>
           You'll register directly through Zoom and receive a confirmation email with your personal join link before the event.
@@ -142,7 +158,7 @@
     </div>
   </div>
 </div>
-
+ 
 <section class="full-band">
   <div class="full-band-inner">
     <div class="callout">
@@ -167,7 +183,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section class="meet-section">
   <div class="meet-inner">
     <div class="meet-photo-wrap">
@@ -197,7 +213,7 @@
     </div>
   </div>
 </section>
-
+ 
 <footer>
  <div class="footer-text" style="margin-bottom: 12px;">
     The LPL Financial registered representative(s) associated with this website may discuss and/or transact business only with residents of the states in which they are properly registered or licensed. No offers may be made or accepted from any resident of any other state.
@@ -212,6 +228,6 @@
     <div class="footer-cell">May Lose Value</div>
   </div>
 </footer>
-
+ 
 </body>
 </html>
