@@ -17,9 +17,16 @@
   .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: #fff; line-height: 1.15; max-width: 700px; margin: 0 auto 14px; }
   .hero h1 em { font-style: italic; color: var(--gold-light); }
   .hero-sub { font-size: 17px; color: rgba(255,255,255,0.7); max-width: 520px; margin: 0 auto 36px; }
-  .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 36px; }
   .pill { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); font-size: 13px; padding: 6px 16px; border-radius: 100px; }
   .pill-gold { background: rgba(181,129,58,0.2); border: 1px solid rgba(181,129,58,0.5); color: var(--gold-light); font-weight: 600; }
+  .hero-cta { display: inline-block; background: var(--gold); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 700; text-align: center; text-decoration: none; padding: 20px 48px; border-radius: 10px; box-shadow: 0 6px 18px rgba(181,129,58,0.35); }
+  .hero-cta:hover { background: var(--gold-light); }
+  .bottom-cta-section { background: var(--cream); padding: 56px 24px 72px; text-align: center; }
+  .bottom-cta-title { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3.5vw, 34px); font-weight: 700; color: var(--navy); margin-bottom: 28px; }
+  .bottom-cta-sub { font-size: 15px; color: var(--muted); max-width: 480px; margin: 0 auto 28px; }
+  .bottom-cta-btn { display: inline-block; background: var(--gold); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 700; text-align: center; text-decoration: none; padding: 18px 44px; border-radius: 10px; }
+  .bottom-cta-btn:hover { background: var(--gold-light); }
   .body { max-width: 900px; margin: 0 auto; padding: 56px 24px; display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; }
   .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
   .intro-text { font-size: 16px; color: var(--text); line-height: 1.8; }
@@ -117,9 +124,9 @@ fbq('track', 'PageView');
   <p class="hero-sub">You've worked hard to save. Join this free webinar to learn how to preserve it, aim to grow it and create income for your upcoming retirement.</p>
   <div class="hero-pills">
     <span class="pill pill-gold">Wednesday, August 26th at 7:00 PM Central</span>
-    <span class="pill">Free to attend</span>
     <span class="pill">Educational Webinar</span>
   </div>
+  <a class="hero-cta" href="https://zoom.us/webinar/register/WN_VFr-K_qWR-yytK0hhdMPXA#/registration" target="_blank" rel="noopener" onclick="fbq('track', 'Lead');">Reserve Your Free Seat &rarr;</a>
 </section>
  
 <div class="body">
@@ -141,7 +148,7 @@ fbq('track', 'PageView');
       </div>
       <div class="reg-body">
         <p class="reg-intro">Clicking the button below will take you directly to the Zoom registration form for this webinar.</p>
-        <a class="reg-btn" href="https://zoom.us/webinar/register/WN_VFr-K_qWR-yytK0hhdMPXA#/registration" target="_blank" rel="noopener" onclick="fbq('track', 'Lead');">Reserve My Free Seat &rarr;</a>
+        <a class="reg-btn" href="https://zoom.us/webinar/register/WN_VFr-K_qWR-yytK0hhdMPXA#/registration" target="_blank" rel="noopener" onclick="fbq('track', 'Lead');">Reserve Your Free Seat &rarr;</a>
         <div class="zoom-note">
           <svg viewBox="0 0 24 24"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M17 10l4-3v10l-4-3"/></svg>
           You'll register directly through Zoom and receive a confirmation email with your personal join link before the event.
@@ -212,6 +219,11 @@ fbq('track', 'PageView');
       </div>
     </div>
   </div>
+</section>
+ 
+<section class="bottom-cta-section">
+  <div class="bottom-cta-title">Take the Next Step in Your Retirement Planning</div>
+  <a class="bottom-cta-btn" href="https://zoom.us/webinar/register/WN_VFr-K_qWR-yytK0hhdMPXA#/registration" target="_blank" rel="noopener" onclick="fbq('track', 'Lead');">Reserve Your Free Seat &rarr;</a>
 </section>
  
 <footer>
