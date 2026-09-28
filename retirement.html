@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will Your Retirement Actually Hold Up? | Kolin Hayes, NVIS</title>
+<meta name="description" content="A short video walkthrough showing how one couple stress-tested their retirement plan — and what they changed. Book a free consultation with Kolin Hayes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #142238;
+    --navy-deep: #0d1729;
+    --gold: #a97f3f;
+    --gold-bright: #bd9553;
+    --cream: #f6f1e6;
+    --paper: #fbf8f1;
+    --ink: #1c2230;
+    --ink-soft: #4a5164;
+    --line: rgba(20,34,56,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none !important; transition:none !important;} }
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:"DM Sans", -apple-system, sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:"Playfair Display", Georgia, serif; font-weight:600; line-height:1.18; margin:0; color:inherit;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  .wrap{max-width:700px; margin:0 auto; padding:0 24px;}
+
+  .top{background:var(--navy-deep); color:var(--cream); padding:18px 24px; text-align:center; font-size:0.92rem;}
+  .top strong{color:var(--gold-bright); font-weight:700;}
+
+  /* ---- editorial hero, on paper not navy ---- */
+  .hero{padding:72px 24px 20px;}
+  .rule{width:48px; height:2px; background:var(--gold); margin:0 0 22px;}
+  .kicker{font-size:0.98rem; color:var(--gold); margin:0 0 6px; font-style:italic; font-family:"Playfair Display", serif;}
+  .hero h1{font-size:2.9rem; color:var(--navy); max-width:14ch;}
+  .hero p.sub{margin:22px 0 0; font-size:1.14rem; color:var(--ink-soft); max-width:44ch;}
+
+  .fit-list-inline{list-style:none; margin:22px 0 0; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .fit-list-inline li{display:flex; gap:10px; align-items:flex-start; font-size:1.02rem; color:var(--ink);}
+  .fit-list-inline svg{flex:0 0 auto; width:19px; height:19px; margin-top:3px; fill:var(--gold);}
+
+  .video-frame{
+    margin:40px auto 0; max-width:640px;
+    aspect-ratio:16/9; background:var(--navy-deep); border-radius:4px;
+    position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .video-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+  .video-caption{margin:16px auto 0; text-align:center; color:var(--ink-soft); font-size:0.85rem; max-width:560px; font-style:italic;}
+  .no-pressure{margin:28px auto 0; text-align:center; font-family:"Playfair Display", serif; font-style:italic; font-size:1.1rem; color:var(--navy); max-width:480px;}
+
+  .cta-wrap{text-align:center; margin-top:8px;}
+  .cta-btn{display:inline-block; margin-top:30px; background:var(--navy); color:var(--cream); font-weight:700; text-decoration:none; padding:15px 30px; border-radius:3px; font-size:1.02rem;}
+  .cta-btn:hover{background:var(--navy-deep);}
+  .cta-note{margin:14px 0 0; font-size:0.85rem; color:var(--ink-soft);}
+
+  /* pull-stat block instead of 3-col facts */
+  .pull{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    margin:64px 0; padding:36px 0;
+  }
+  .pull p{
+    font-family:"Playfair Display", serif; font-style:normal; font-size:1.4rem;
+    color:var(--navy); line-height:1.4; margin:0; max-width:56ch;
+  }
+  .pull span{display:block; margin-top:14px; font-family:"DM Sans", sans-serif; font-style:normal; font-size:0.9rem; color:var(--ink-soft);}
+
+  section.block{padding:20px 24px 64px;}
+  .block h2{font-size:1.85rem; color:var(--navy); max-width:22ch;}
+
+  .about-grid{display:grid; grid-template-columns:100px 1fr; gap:24px; align-items:start; margin-top:26px;}
+  .avatar{width:100px; height:100px; border-radius:50%; background:var(--navy); display:flex; align-items:center; justify-content:center; color:var(--gold-bright); font-family:"Playfair Display", serif; font-size:1.8rem;}
+  .about-grid p{margin:0 0 12px; color:var(--ink-soft); font-size:1rem;}
+  .about-grid p:last-child{margin-bottom:0;}
+  .about-grid .name{font-family:"Playfair Display", serif; font-size:1.15rem; color:var(--ink); margin-bottom:4px;}
+  .about-grid .role{color:var(--gold); font-size:0.9rem; margin-bottom:14px;}
+
+  .process{margin-top:56px;}
+  .process h2{font-size:1.5rem; color:var(--navy); margin-bottom:26px;}
+  .process-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:20px;}
+  .process-list li{display:flex; gap:18px; align-items:flex-start; padding-bottom:20px; border-bottom:1px solid var(--line);}
+  .process-list li:last-child{border-bottom:none; padding-bottom:0;}
+  .pnum{flex:0 0 auto; width:30px; font-family:"Playfair Display", serif; font-size:1.3rem; color:var(--gold); line-height:1.4;}
+  .process-list strong{font-family:"Playfair Display", serif; font-weight:600; color:var(--ink); font-size:1.02rem; display:block; margin-bottom:2px;}
+  .process-list span.desc{color:var(--ink-soft); font-size:0.96rem;}
+
+  .final-cta{background:var(--navy); color:var(--cream); text-align:center; padding:70px 24px; margin-top:20px;}
+  .final-cta h2{color:var(--cream); font-size:2rem; max-width:18ch; margin:0 auto;}
+  .final-cta p{color:rgba(246,241,230,0.78); font-size:1.05rem; margin:16px auto 0; max-width:44ch;}
+  .final-cta .cta-btn{background:var(--gold-bright); color:var(--navy-deep);}
+  .final-cta .cta-btn:hover{background:#d0b073;}
+  .final-cta .cta-note{color:rgba(246,241,230,0.55);}
+
+  footer{background:var(--navy-deep); color:rgba(246,241,230,0.55); padding:36px 24px 44px; font-size:0.78rem; line-height:1.6;}
+  footer .wrap{max-width:820px;}
+  footer p{margin:0 0 10px;}
+  footer a{color:rgba(246,241,230,0.75); text-decoration:underline;}
+
+  @media (max-width:640px){
+    .hero h1{font-size:2.1rem;}
+    .hero{padding:52px 20px 16px;}
+    section.block{padding:16px 20px 48px;}
+    .about-grid{grid-template-columns:1fr;}
+    .final-cta{padding:52px 20px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="top">Nodaway Valley Investment Services · <strong>Serving those retiring in 5-10 years all around the Kansas City Area</strong></div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="rule"></div>
+      <h1>Get clarity and confidence in your retirement</h1>
+      <p class="sub">This 12-minute video walks through a glimpse of the work I do with my clients to help them answer questions like:</p>
+      <ul class="fit-list-inline">
+        <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span>"Will I run out of money in retirement?"</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span>"When should I claim Social Security?"</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span>"How do I avoid overpaying in taxes?"</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span>"How much can I safely spend each month?"</span></li>
+      </ul>
+    </div>
+    <div class="video-frame">
+      <iframe src="https://www.youtube.com/embed/8QrEtiakUzc" title="Get clarity and confidence in your retirement" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">This walkthrough uses one of the planning tools we use with clients closer to retirement. We use a different tool called Asset Map for clients earlier in their career.</p>
+    <div class="wrap">
+      <p class="no-pressure">No cookie-cutter advice. No pressure. No commitment before seeing your numbers.</p>
+    </div>
+    <div class="cta-wrap">
+      <a class="cta-btn" href="https://kolinhayes.com/call">Book your free consultation to see if you qualify</a>
+      <p class="cta-note">45 minutes · No cost · No obligation</p>
+    </div>
+  </header>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="pull">
+        <p>People with a professional financial plan are more than twice as likely to feel confident about retiring when they want, compared to people with no plan at all.</p>
+        <span>KPMG, 2025 Canadian Financial Planning Survey <a href="https://kpmg.com/ca/en/media/2025/09/financial-plans-linked-to-retirement-confidence.html" target="_blank" rel="noopener" style="color:var(--ink-soft); text-decoration:underline;">[1]</a></span>
+      </div>
+
+      <h2>Who you'd be working with</h2>
+      <div class="about-grid">
+        <div class="avatar">KH</div>
+        <div>
+          <div class="name">Kolin Hayes</div>
+          <div class="role">Financial Planner, Nodaway Valley Investment Services</div>
+          <p>Kolin works with many types of clients but specializes in working with pre-retirees to build a plan that's tested against real market conditions, so you know where you stand before you give notice.</p>
+          <p>Based in Platte City, MO.</p>
+        </div>
+      </div>
+
+      <div class="process">
+        <h2>How it works</h2>
+        <ol class="process-list">
+          <li><span class="pnum">1</span><div><strong>Strategy Meeting</strong><span class="desc">A free, no-pressure call to see if working together makes sense.</span></div></li>
+          <li><span class="pnum">2</span><div><strong>Plan Creation</strong><span class="desc">We build a plan around your goals, taxes, investments, and timeline.</span></div></li>
+          <li><span class="pnum">3</span><div><strong>Plan Delivery</strong><span class="desc">We walk through it together so you know exactly what to do next.</span></div></li>
+          <li><span class="pnum">4</span><div><strong>Ongoing Support</strong><span class="desc">We meet twice a year to keep the plan on track — and you can reach out anytime in between.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="wrap">
+      <h2>See where your plan stands</h2>
+      <p>Book a free, no-obligation consultation and get a clear read on your retirement odds — before it's too late to adjust.</p>
+      <a class="cta-btn" href="https://kolinhayes.com/call">Book your free consultation</a>
+      <p class="cta-note">45 minutes · No cost · No obligation</p>
+    </div>
+  </section>
+
+  <p style="text-align:center; padding:28px 24px; margin:0; font-size:0.92rem; color:var(--ink-soft); background:var(--paper);">
+    Want to learn more about Kolin and NVIS? Visit <a href="https://kolinhayes.com" style="color:var(--navy); text-decoration:underline;">kolinhayes.com</a>
+  </p>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2026 Nodaway Valley Bank. All Rights Reserved.</p>
+      <p><strong>Securities and advisory services are offered through LPL Financial (LPL), a registered investment advisor and broker-dealer (member FINRA/SIPC).</strong> Insurance products are offered through LPL or its licensed affiliates. Nodaway Valley Bank (NVB) and Nodaway Valley Investment Services&trade; (NVIS) <strong><u>are not</u></strong> registered as a broker-dealer or investment advisor. Registered representatives of LPL offer products and services using the name NVIS, and may also be employees of NVB. These products and services are being offered through LPL or its affiliates, which are separate entities from, and not affiliates of, NVB or NVIS. Securities and insurance offered through LPL or its affiliates are:</p>
+      <ul style="list-style:none; margin:0 0 10px; padding:0;">
+        <li>⚠ <strong>Not Insured by FDIC or Any Other Government Agency</strong></li>
+        <li>⚠ <strong>Not Bank Guaranteed</strong></li>
+        <li>⚠ <strong>Not Bank Deposits or Obligations</strong></li>
+        <li>⚠ <strong>May Lose Value</strong></li>
+      </ul>
+      <p>Nodaway Valley Bank provides referrals to financial professionals of LPL Financial LLC ("LPL") pursuant to an agreement that allows LPL to pay the Financial Institution for these referrals. This creates an incentive for the Financial Institution to make these referrals, resulting in a conflict of interest. The Financial Institution is not a current client of LPL for advisory services. Please visit <a href="https://www.lpl.com/disclosures/is-lpl-relationship-disclosure.html" target="_blank" rel="noopener">https://www.lpl.com/disclosures/is-lpl-relationship-disclosure.html</a></p>
+      <p>The LPL Financial registered representative(s) associated with this website may discuss and/or transact business only with residents of the states in which they are properly registered or licensed. No offers may be made or accepted from any resident of any other state.</p>
+      <p><a href="https://www.finra.org/#/" target="_blank" rel="noopener">Check the background of this investment professional on FINRA's BrokerCheck</a> · <a href="#">Form CRS</a></p>
+      <p>[1] <a href="https://kpmg.com/ca/en/media/2025/09/financial-plans-linked-to-retirement-confidence.html" target="_blank" rel="noopener">https://kpmg.com/ca/en/media/2025/09/financial-plans-linked-to-retirement-confidence.html</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
